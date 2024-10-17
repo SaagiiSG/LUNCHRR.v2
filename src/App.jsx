@@ -5,6 +5,8 @@ import Navbar from './components/navbar/Navbar'
 import Dashboard from './pages/Dashboard'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Form from './components/Form'
+import AllUser from './pages/allUser'
+import Convert from './pages/Calendar'
 import DashBoardTable from './pages/dashBoardTable'
 function App() {
   
@@ -15,9 +17,11 @@ function App() {
         <Dashboard />
       </main> */}
       <Router>
-      <Navbar />
+      {/* <Navbar /> */}
         <Routes>
           <Route path='/' element={<Dashboard/>} />
+          <Route path='/Users' element={<AllUser/>} />
+          <Route path='/Convert' element={<Convert/>} />
           <Route path='/login' element={<Form/>}/>
         </Routes>
       </Router>
