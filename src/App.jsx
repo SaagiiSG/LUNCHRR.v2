@@ -9,7 +9,7 @@ import AllUser from './pages/allUser'
 import Convert from './pages/Calendar'
 import DashBoardTable from './pages/dashBoardTable'
 function App() {
-  
+  const [isLoggedIn, setLoggedIn] = useState(true)
   return (
     <section className='w-full h-screen pt-4 bg-background flex overflow-hidden'>
       
@@ -19,10 +19,10 @@ function App() {
       <Router>
       {/* <Navbar /> */}
         <Routes>
-          <Route path='/' element={<Dashboard/>} />
-          <Route path='/Users' element={<AllUser/>} />
-          <Route path='/Convert' element={<Convert/>} />
-          <Route path='/login' element={<Form/>}/>
+          <Route path='/Dashboard' element={<Dashboard loggedIn={isLoggedIn}/>} />
+          <Route path='/Users' element={<AllUser loggedIn={isLoggedIn}/>} />
+          <Route path='/Convert' element={<Convert loggedIn={isLoggedIn}/>} />
+          <Route path='/' element={<Form loggedIn={isLoggedIn}/>}/>
         </Routes>
       </Router>
     </section>

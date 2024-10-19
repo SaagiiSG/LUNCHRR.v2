@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import Navbar from '../components/navbar/Navbar'
 import { json } from 'react-router'
 import peopleIcon from "../assets/icons/people.svg"
+import SearchIcon from "../assets/icons/SearchOutline.svg"
 import {motion} from "framer-motion"
 // import { data } from '@remix-run/router/dist/utils'
-const AllUser = () => {
+const AllUser = ({loggedIn}) => {
 
     const[users,setUsers] = React.useState([])
     const FetchUsers=() => {fetch('https://jsonplaceholder.typicode.com/users')
@@ -15,11 +16,12 @@ const AllUser = () => {
     },[])
   
    console.log(users);
+  
    
 
   return (
     <main className='w-full h-screen flex'>
-      <Navbar activebtnNumber={2}/>
+      <Navbar activebtnNumber={2} loggedIn={loggedIn}/>
       <motion.article 
          initial={{opacity:0, background:"#f5f5f5"}}
          animate={{opacity:1}}
@@ -30,12 +32,16 @@ const AllUser = () => {
             <img src={peopleIcon} alt="" className='w-10' />
             <p className='text-2xl'>Users</p>
           </div>
-          <div className='flex gap-2 px-4 bg-white bg-opacity-95 text-background rounded-lg items-center h-12'>
+          {/* <div className='flex gap-2 px-4 bg-white bg-opacity-95 text-background rounded-lg items-center h-12'>
             <p>sort :</p> 
             <select name="" id="" className='text-center bg-transparent  outline-none grid items-center h-full'>
               <option className='bg-background bg-opacity-10 outline-none border-none hover:bg-pink-primary' value="">A-Z</option>
               <option className='bg-background bg-opacity-10 outline-none border-none hover:bg-pink-primary' value="">highest - lowest</option>
             </select>
+          </div> */}
+          <div className='bg-white bg-opacity-95 text-background rounded-lg items-center h-12 flex px-2 gap-2'>
+            <img src={SearchIcon} alt="" />
+            <input type="text"  placeholder='search' className='bg-transparent outline-none'/>
           </div>
         </section>
         

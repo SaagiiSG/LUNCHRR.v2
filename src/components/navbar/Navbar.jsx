@@ -7,9 +7,11 @@ import NavBtn from './NavBtn'
 import {motion} from "framer-motion"
 // import { Link } from 'react-router-dom'
 import Profile from '../profile'
-const Navbar = ({activebtnNumber}) => {
-  const [isLoggedIn, setLoggedIn] = React.useState(true)
+const Navbar = ({activebtnNumber, loggedIn}) => {
+  const isLoggedIn = loggedIn;
+  console.log(isLoggedIn);
   
+  const logInOrOut = isLoggedIn ? "Log Out" : "Log In"
   const icon = DashboardIcon
   return (
     <nav  
@@ -22,10 +24,10 @@ const Navbar = ({activebtnNumber}) => {
       <div className='w-full flex flex-col items-start gap-6 px-4 mt-8'>
         
       {isLoggedIn == true ? <>
-        {activebtnNumber == 1 ? <NavBtn icon={DashboardIcon} btnName={"Dashboard"} path={"/"} activeBtn={true}/> : <NavBtn icon={DashboardIcon} btnName={"Dashboard"} path={"/"} activeBtn={false}/>  } 
+        {activebtnNumber == 1 ? <NavBtn icon={DashboardIcon} btnName={"Dashboard"} path={"/Dashboard"} activeBtn={true}/> : <NavBtn icon={DashboardIcon} btnName={"Dashboard"} path={"/Dashboard"} activeBtn={false}/>  } 
         {activebtnNumber == 2 ? <NavBtn icon={UserIcon} btnName={"Users"} path={"/Users"} activeBtn={true}/> : <NavBtn icon={UserIcon} btnName={"Users"} path={"/Users"} activeBtn={false}/>  } 
-        {activebtnNumber == 3 ? <NavBtn icon={CalendarIcon} btnName={"Convert"}  path={"/Convert"} activeBtn={true}/> : <NavBtn icon={CalendarIcon} btnName={"Convert"}  path={"/Convert"} activeBtn={false}/>  }         </>:""}
-        {activebtnNumber == 4 ? <NavBtn icon={LogoutIcon} btnName={"Login"} path={"/login"} activeBtn={true}/> : <NavBtn icon={LogoutIcon} btnName={"Login"} path={"/login"} activeBtn={false}/>} 
+        {activebtnNumber == 3 ? <NavBtn icon={CalendarIcon} btnName={"Convert"}  path={"/Convert"} activeBtn={true}/> : <NavBtn icon={CalendarIcon} btnName={"Convert"}  path={"/Convert"} activeBtn={false}/>}</>:""}
+        {activebtnNumber == 4 ? <NavBtn icon={LogoutIcon} btnName={logInOrOut} path={"/"} activeBtn={true}/> : <NavBtn icon={LogoutIcon} btnName={logInOrOut} path={"/"} activeBtn={false}/>} 
       </div>
       </section>
       {isLoggedIn == true ? <Profile 
