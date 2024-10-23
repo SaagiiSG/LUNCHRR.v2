@@ -3,6 +3,7 @@ import Navbar from '../components/navbar/Navbar'
 import { json } from 'react-router'
 import peopleIcon from "../assets/icons/people.svg"
 import SearchIcon from "../assets/icons/SearchOutline.svg"
+import Popup from '../components/users/Popup'
 import {motion} from "framer-motion"
 // import { data } from '@remix-run/router/dist/utils'
 const AllUser = ({loggedIn}) => {
@@ -16,8 +17,10 @@ const AllUser = ({loggedIn}) => {
     },[])
   
    console.log(users);
-  
-   
+    const [isAddNewDisplay, setAddNewUser] = React.useState(false)
+   function DisplayAddNewUser(){
+      setAddNewUser(!isAddNewDisplay)
+   }
 
   return (
     <main className='w-full h-screen flex'>
@@ -26,23 +29,25 @@ const AllUser = ({loggedIn}) => {
          initial={{opacity:0, background:"#f5f5f5"}}
          animate={{opacity:1}}
          transition={{delay:0, duration:0.6}}
-        className='w-full h-full rounded-tl-3xl bg-white p-4 overflow-auto flex flex-col items-start justify-start gap-4'>
+        className='w-full h-full rounded-tl-3xl bg-white p-4 overflow-auto flex flex-col items-center justify-center gap-4 relative'>
+        
+        {isAddNewDisplay ? <Popup handleClick={DisplayAddNewUser}/> : ""}
         <section className='flex w-full justify-between items-center text-lgx  py-5 px-4 bg-background text-white rounded-2xl'>
+          
+          
           <div className='flex gap-4 items-center'>
             <img src={peopleIcon} alt="" className='w-10' />
             <p className='text-2xl'>Users</p>
           </div>
-          {/* <div className='flex gap-2 px-4 bg-white bg-opacity-95 text-background rounded-lg items-center h-12'>
-            <p>sort :</p> 
-            <select name="" id="" className='text-center bg-transparent  outline-none grid items-center h-full'>
-              <option className='bg-background bg-opacity-10 outline-none border-none hover:bg-pink-primary' value="">A-Z</option>
-              <option className='bg-background bg-opacity-10 outline-none border-none hover:bg-pink-primary' value="">highest - lowest</option>
-            </select>
-          </div> */}
-          <div className='bg-white bg-opacity-95 text-background rounded-lg items-center h-12 flex px-2 gap-2'>
+          
+          <div className='bg-white bg-opacity-95 text-background rounded-2xl items-center h-12 w-1/2 flex px-2 gap-2'>
             <img src={SearchIcon} alt="" />
             <input type="text"  placeholder='search' className='bg-transparent outline-none'/>
           </div>
+          <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-pink-primary'>
+            <p> add new user </p> 
+            <span className='text-3xl rotate-180 group-hover:rotate-0 duration-300'>+</span>
+          </button>
         </section>
         
         <section className='w-full h-full border-2 rounded-2xl border-background overflow-auto mb-4'>
