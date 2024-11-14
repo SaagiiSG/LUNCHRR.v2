@@ -9,7 +9,6 @@ import {motion} from "framer-motion"
 import Profile from '../profile'
 const Navbar = ({activebtnNumber, loggedIn}) => {
   const isLoggedIn = loggedIn;
-  console.log(isLoggedIn);
   
   const logInOrOut = isLoggedIn ? "Log Out" : "Log In"
   const icon = DashboardIcon

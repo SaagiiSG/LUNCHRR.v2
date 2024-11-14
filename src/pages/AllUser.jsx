@@ -8,48 +8,61 @@ import DeleteUser from '../components/users/deleteUser'
 import {motion} from "framer-motion"
 // import UserListItem from '../components/users/UserListItem'
 // import { data } from '@remix-run/router/dist/utils'
+function UserListItem({ name, username, id, phone, initialChecked, onToggle, onSelectUser }){
+  const[isChecked, setIsChecked] = React.useState(initialChecked);
 
-function UserListItem( props, {initialChecked, onToggle}){
-  const [isChecked, setIsChecked] = React.useState(initialChecked); 
- 
-  const handleCheckboxChange = (event) => { 
-    const checked = event.target.checked; 
-    setIsChecked(checked); 
-    onToggle(checked);
+  const handleCheckboxChange = (event) => {
+    const checked = event.target.checked;  // Get the checked state
+    setIsChecked(checked);
+    onToggle(checked);  // Pass the checked state back to parent
 
-  }; 
+    if (checked) {
+      onSelectUser(name);  // Pass the selected user's name to parent if checked
+    }
+  };
+
   return (
     <tr className='even:bg-background even:bg-opacity-5 odd:bg-background odd:bg-opacity-15 w-full px-5'>
-    <td className='h-14 text-lg font-md text-center w-[30%]'>{props.name}</td>
-    <td className='h-14 text-lg font-md text-center w-[20%]'>{props.username}</td>
-    <td className='h-14 text-lg font-md text-center w-[20%]'>{props.id}</td>
-    <td className='h-14 text-lg font-md text-center w-[20%] '>{props.phone}</td>
-    <td className='h-14 w-full flex items-center justify-center text-center pr-2'>
-    <label class="flex items-center cursor-pointer relative">
-      <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}  class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-pink-primary checked:border-slate-800" id="check" />
-      <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-        </svg>
-      </span>
-    </label>
-    </td>
-  </tr>
-  )}
+      <td className='h-14 text-lg font-md text-center w-[30%]'>{name}</td>
+      <td className='h-14 text-lg font-md text-center w-[20%]'>{username}</td>
+      <td className='h-14 text-lg font-md text-center w-[20%]'>{id}</td>
+      <td className='h-14 text-lg font-md text-center w-[20%]'>{phone}</td>
+      <td className='h-14 w-full flex items-center justify-center text-center pr-2'>
+        <label className="flex items-center cursor-pointer relative">
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-pink-primary checked:border-slate-800"
+          />
+          <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+        </label>
+      </td>
+    </tr>
+  );
+  }
 
 const AllUser = ({loggedIn}) => {
-    const [isChecked, setIsChecked] = React.useState(false); 
-  
-    const toggleChecked = (newState) => { 
-      setIsChecked(newState); // Sync with the child's state 
-    }; 
-    const [selectedID, setSelectedID] = React.useState(null)
+    const [isChecked, setIsChecked] = React.useState(false);
+    const [selectedUserNames, setSelectedUserNames] = React.useState([]); // State for selected user's name
 
-    const handleIdFromChild = (id) => {
-      setSelectedID(id);
-      console.log("Received ID from child:", id);
+    const toggleChecked = (checked, name) => {
+      setSelectedUserNames((prevSelectedNames) => {
+        if (checked) {
+          return [...prevSelectedNames, name]; // Add user name if checked
+        } else {
+          return prevSelectedNames.filter((selectedName) => selectedName !== name); // Remove user name if unchecked
+        }
+      });
     };
-    const[delUSelectedCount, setDelUSelectedCount ] = React.useState(2)
+
+    const length = selectedUserNames.length
+    
+    
 
     const[users,setUsers] = React.useState([])
     const FetchUsers=() => {fetch('https://jsonplaceholder.typicode.com/users')
@@ -59,17 +72,12 @@ const AllUser = ({loggedIn}) => {
       FetchUsers()
     },[])
   
-   console.log(users);
     const [isAddNewDisplay, setAddNewUser] = React.useState(false)
-    const [selcetedName , setSelectedName] = React.useState("")
-    const [ checked , setChecked] = React.useState(false)
-    function settingChecked(){
-      setChecked(!setChecked)
-    }
+
    function DisplayAddNewUser(){
       setAddNewUser(!isAddNewDisplay)
    }
-  
+     
   return (
     <main className='w-full h-screen flex'>
       <Navbar activebtnNumber={2} loggedIn={loggedIn}/>
@@ -100,7 +108,7 @@ const AllUser = ({loggedIn}) => {
           </button>
           </div>
           
-          <DeleteUser ShouldDisplay={delUSelectedCount} name={selcetedName}/>
+          <DeleteUser ShouldDisplay={length} names={selectedUserNames}/>
         </section>
         
         <section className='w-full h-full border-2 rounded-2xl border-background overflow-auto mb-4'>
@@ -112,7 +120,7 @@ const AllUser = ({loggedIn}) => {
               <th className='h-16 text-xl font-semibold w-[20%] border-b-2 border-background'>Monthly payment</th>
               <th className='h-16 text-xl font-semibold w-[10%] border-b-2 border-background'></th>
             </tr>
-            
+            <tbody>
               {users.map((uData)=>{
                 return(
                   <UserListItem 
@@ -120,12 +128,12 @@ const AllUser = ({loggedIn}) => {
                     username={uData.username}
                     id={uData.id}
                     phone={uData.phone}
-                    initialChecked={isChecked}
-                    onToggle={toggleChecked} 
-                    handleIdFromChild={handleIdFromChild}
+                    initialChecked={selectedUserNames.includes(uData.name)}
+                    onToggle={(checked) => toggleChecked(checked, uData.name)}
                   />
                 )
                 })}
+            </tbody>
           </table>
         </section>
         

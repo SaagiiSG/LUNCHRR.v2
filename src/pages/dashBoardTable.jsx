@@ -1,21 +1,46 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
+import Day from '../components/dashboard/Day';
 
-const DashBoardTable = ({displayMonth} ,{id}) => {
-    // console.log(displayMonth);
-    const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
+const DashBoardTable = ({displayMonth}, {displayMonthNum} ) => {
+
+    const monthss = [
+        {
+            MonthName:"Jan"
+        },
+        {
+            MonthName:"Feb"
+        },
+        {
+            MonthName:"Mar"
+        },
+        {
+            MonthName:"Apr"
+        },
+        {
+            MonthName:"May"
+        },
+        {
+            MonthName:"June"
+        },
+        {
+            MonthName:"July"
+        },
+        {
+            MonthName:"Aug"
+        },
+        {
+            MonthName:"Sep"
+        },
+        {
+            MonthName:"Oct"
+        },
+        {
+            MonthName:"Nov"
+        },
+        {
+            MonthName:"Dec"
+        },
     ]
     const ComplexDashboardInfo = [
         {
@@ -25,9 +50,14 @@ const DashBoardTable = ({displayMonth} ,{id}) => {
             MonthName:"Feb"
         }
     ]
-    const activeMonth = months.find(month=> month == displayMonth)
+
+    console.log(monthss[11].MonthName);
+    
+    // const activeMonth = monthss[displayMonthNum].MonthName
+    // console.log(monthss[displayMonthNum]);
+    
     return(
-        <div>hello {activeMonth} </div>
+        <div>hello  </div>
     )
 }
 
