@@ -4,8 +4,47 @@ import foodIcon from "../../assets/icons/mdi_food.svg"
 import personIcon from "../../assets/icons/people_black.svg"
 import {motion} from "framer-motion"
 
-const MonthDisplay = ({month , date , totalMeal, totalPayment, avaragePerson}) => {
+const ListItem = ({icon, content, hovermessage}) => {
+  const [isHoveredForLi, setIsHoveredForLi] = React.useState(false);
+  const PopUpVariantsForLi = {
+    hover: {
+      y: -20,
+      
+    },
+    initial: {
+      x: 0,
+      opacity:0,
+      scale: 1
+    }
+  };
+  function handleMouseEnterForLi() {
+    setIsHoveredForLi(true);
+  }
+
+  function handleMouseLeaveForLi() {
+    setIsHoveredForLi(false);
+  }
+
+  return (
+      <motion.li 
+      onMouseEnter={handleMouseEnterForLi}
+      onMouseLeave={handleMouseLeaveForLi}
+      
+      className='w-full flex gap-3 items-end'>   
+      <div className='text-xs font-normal relative'>
+        <motion.p 
+        variants={PopUpVariantsForLi}
+        animate={isHoveredForLi ? "hover" : "initial"} 
+        className='bg-pink-accent text-white p-1 px-2 rounded-md absolute w-auto text-nowrap'>{hovermessage}</motion.p>
+        <img className='w-10' src={icon} alt="" /> 
+      </div>                
+      <p>{content}  </p>
+    </motion.li> 
+  )
+}
+const MonthDisplay = ({month , date , grade , totalMeal, totalPayment, avaragePerson}) => {
     const [isHovered, setIsHovered] = React.useState(false);
+    
 
     const PopUpVariants = {
       hover: {
@@ -18,6 +57,7 @@ const MonthDisplay = ({month , date , totalMeal, totalPayment, avaragePerson}) =
         scale: 1
       }
     };
+    
     const ArrowVariants = {
       hover: {
         rotate:90
@@ -34,17 +74,22 @@ const MonthDisplay = ({month , date , totalMeal, totalPayment, avaragePerson}) =
     function handleMouseLeave() {
       setIsHovered(false);
     }
+   
     return(
         <div className='w-[32%] flex flex-col border-pink-accent border-2 rounded-2xl px-3 py-2'>
             <header className='w-full flex flex-col pb-4 pt-2 border-b-2'>
-                <h1 className='text-2xl font-semibold'>{month}</h1>
-                <p className='text-md opacity-85'>{date}</p>
+                <h1 className='text-2xl font-semibold'>{month} {grade} </h1>
+                <p 
+                variants={PopUpVariants}
+                animate={isHovered ? "hover" : "initial"} 
+                className='text-md opacity-85'>{date}</p>
             </header>
             <div className='flex w-full h-full justify-between items-end'>
-            <ul className='mt-4 flex flex-col gap-2 text-lg font-semibold'>
-              <li className='w-full flex gap-3 items-end'><img className='w-10' src={foodIcon} alt="" /> <p>{totalMeal} <span className='font-normal text-sm'>meals eaten</span> </p></li> 
-              <li className='w-full flex gap-3 items-end'><img className='w-10' src={coinIcon} alt="" /> <p>{totalPayment}</p></li>
-              <li className='w-full flex gap-3 items-end'><img className='w-10' src={personIcon} alt="" /> <p>{avaragePerson}</p></li>
+            <ul className='mt-4 flex flex-col gap-6 text-lg font-semibold'>
+              <ListItem icon={foodIcon} content={totalMeal} hovermessage={"Total meals eaten this month"}/>
+              <ListItem icon={coinIcon} content={totalPayment} hovermessage={"Total cost for this month"}/>
+              <ListItem icon={personIcon} content={avaragePerson} hovermessage={"Number of avarage person ate lunch this month"}/>
+
             </ul>
            <motion.span 
            onMouseEnter={handleMouseEnter} 

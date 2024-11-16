@@ -1,12 +1,10 @@
 import React from 'react'
 import Navbar from '../components/navbar/Navbar'
 import CalendarIcon from "../assets/icons/ion_calendar.svg"
-import circleArrow from "../assets/icons/arrows-rotate-solid.svg"
 import MonthDisplay from '../components/month/MonthDisplay'
-import coinIcon from "../assets/icons/bx_coin.svg"
-import foodIcon from "../assets/icons/mdi_food.svg"
-import personIcon from "../assets/icons/people_black.svg"
 import {motion} from "framer-motion"
+
+
 const Convert = ({loggedIn}) => {
   const [selected ,setSelected] = React.useState(false)
 
@@ -34,6 +32,7 @@ const Convert = ({loggedIn}) => {
               <p className='group-hover:text-white'>Converting</p>
             </button> 
             }
+            
             
 
       </section>

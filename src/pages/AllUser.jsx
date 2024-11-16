@@ -47,7 +47,11 @@ function UserListItem({ name, username, id, phone, initialChecked, onToggle, onS
   }
 
 const AllUser = ({loggedIn}) => {
-    const [isChecked, setIsChecked] = React.useState(false);
+    const m = new Date()
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const activeMonthNumber = m.getMonth()
+    const activeMonth = months[activeMonthNumber]
+
     const [selectedUserNames, setSelectedUserNames] = React.useState([]); // State for selected user's name
 
     const toggleChecked = (checked, name) => {
@@ -62,7 +66,12 @@ const AllUser = ({loggedIn}) => {
 
     const length = selectedUserNames.length
     
-    
+    const deselectUser = (name) => {
+      
+      setSelectedUserNames((prevSelectedNames) => 
+        prevSelectedNames.filter((selectedName) => selectedName !== name)
+      );
+    };
 
     const[users,setUsers] = React.useState([])
     const FetchUsers=() => {fetch('https://jsonplaceholder.typicode.com/users')
@@ -108,7 +117,7 @@ const AllUser = ({loggedIn}) => {
           </button>
           </div>
           
-          <DeleteUser ShouldDisplay={length} names={selectedUserNames}/>
+          <DeleteUser ShouldDisplay={length} names={selectedUserNames} deselect={deselectUser}/>
         </section>
         
         <section className='w-full h-full border-2 rounded-2xl border-background overflow-auto mb-4'>
@@ -117,7 +126,7 @@ const AllUser = ({loggedIn}) => {
               <th className='h-16 text-xl font-semibold w-[30%] border-b-2 border-background'>Name</th>
               <th className='h-16 text-xl font-semibold w-[20%] border-b-2 border-background'>Last name</th>
               <th className='h-16 text-xl font-semibold w-[20%] border-b-2 border-background'>Card Id</th>
-              <th className='h-16 text-xl font-semibold w-[20%] border-b-2 border-background'>Monthly payment</th>
+              <th className='h-16 text-xl font-semibold w-[20%] border-b-2 border-background'>{activeMonth} payment</th>
               <th className='h-16 text-xl font-semibold w-[10%] border-b-2 border-background'></th>
             </tr>
             <tbody>

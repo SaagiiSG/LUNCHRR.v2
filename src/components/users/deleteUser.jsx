@@ -10,13 +10,16 @@ function Displaying(){
     if(ShouldDisplay >0){
         return(
             <motion.div className=' text-lg bottom-6 flex w-full bg-background text-white rounded-3xl justify-between items-center pt-4'>
-                <div className='flex gap-2 w-full'>
-                    <p className='break-normal'>Selected users:</p>
-                    <div className='w-1/2 flex flex-wrap overflow-hidden'>
+                <div className='flex gap-2 w-full text-background bg-white p-3 rounded-2xl mr-4'>
+                    <p className='break-normal font-semibold'>Selected users:</p>
+                    <li className='w-full flex flex-wrap overflow-hidden gap-2 '>
                         {names.map((name, index) => (
-                        <p key={index}>{name}{index < names.length - 1 ? ', ' : ''}</p> // Display each name, separated by commas
+                        <div className='group flex flex-row gap-2 bg-pink-primary bg-opacity-80 justify-center items-center p-2 text-white rounded-2xl'>    
+                            <ul  className="" key={index}>{name}</ul> 
+                            {/* <button onClick={deselect} className='rotate-45 group-hover:scale-125 duration-300'><span className='text-4xl'>+</span></button> */}
+                        </div>
                         ))}
-                    </div>
+                    </li>
                 </div>
                 <button className='text-base group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 py-2 px-4 rounded-2xl h-auto w-auto bg-pink-primary'>
                     <p>Delete {plural}</p>
