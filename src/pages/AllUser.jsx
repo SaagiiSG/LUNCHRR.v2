@@ -67,7 +67,7 @@ const AllUser = ({loggedIn}) => {
     const length = selectedUserNames.length
     
     const deselectUser = (name) => {
-      
+
       setSelectedUserNames((prevSelectedNames) => 
         prevSelectedNames.filter((selectedName) => selectedName !== name)
       );
@@ -86,7 +86,10 @@ const AllUser = ({loggedIn}) => {
    function DisplayAddNewUser(){
       setAddNewUser(!isAddNewDisplay)
    }
-     
+   const [searchQuery, setSearchQuery] = React.useState("");
+   const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <main className='w-full h-screen flex'>
       <Navbar activebtnNumber={2} loggedIn={loggedIn}/>
@@ -108,7 +111,13 @@ const AllUser = ({loggedIn}) => {
           
           <div className='bg-white bg-opacity-95 text-background rounded-2xl items-center h-12 w-1/2 flex px-2 gap-2'>
             <img src={SearchIcon} alt="" />
-            <input type="text"  placeholder='search' className='bg-transparent outline-none'/>
+            <input
+                type="text"
+                placeholder='Search by name'
+                className='bg-transparent outline-none'
+                value={searchQuery} // Bind the input to the state
+                onChange={(e) => setSearchQuery(e.target.value)} // Update state on change
+              />
           </div>
 
           <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-pink-primary'>
@@ -130,7 +139,7 @@ const AllUser = ({loggedIn}) => {
               <th className='h-16 text-xl font-semibold w-[10%] border-b-2 border-background'></th>
             </tr>
             <tbody>
-              {users.map((uData)=>{
+              {/* {users.map((uData)=>{
                 return(
                   <UserListItem 
                     name={uData.name}
@@ -141,7 +150,18 @@ const AllUser = ({loggedIn}) => {
                     onToggle={(checked) => toggleChecked(checked, uData.name)}
                   />
                 )
-                })}
+                })} */}
+                {filteredUsers.map((uData) => (
+                <UserListItem
+                  key={uData.id}
+                  name={uData.name}
+                  username={uData.username}
+                  id={uData.id}
+                  phone={uData.phone}
+                  initialChecked={selectedUserNames.includes(uData.name)}
+                  onToggle={(checked) => toggleChecked(checked, uData.name)}
+                />
+              ))}
             </tbody>
           </table>
         </section>

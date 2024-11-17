@@ -7,7 +7,23 @@ import {motion} from "framer-motion"
 
 const Convert = ({loggedIn}) => {
   const [selected ,setSelected] = React.useState(false)
+  const m = new Date()
+  const months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
+  const activeMonthNumber = m.getMonth()
+  const activeMonth = months[activeMonthNumber]
+  const [selectedMonth, setSelectedMonth] = React.useState(activeMonth)
+  const handleChange=(e)=>{
+    setSelectedMonth(e.target.value)
+  }
 
+  const [open, setOpen] = React.useState(false)
+  const SchoolClasses = [
+    "all classes","6.1","6.2","7.1","7.2","8.1","8.2","9.1","9.2","10.1","10.2","11.1","11.2","12.1","12.2",
+  ]
+  const [selectedClass, setSelectedClass] = React.useState() 
+  function selectClass(e){
+    setSelectedClass(e.target.value)
+  }
   return (
     <main className='w-full flex'>
     <Navbar activebtnNumber={3} loggedIn={loggedIn}/>
@@ -21,6 +37,32 @@ const Convert = ({loggedIn}) => {
               <img src={CalendarIcon} alt="" className='w-10' />
               <p className='text-2xl'>Convert</p>
             </div>
+            <div className='flex gap-2 z-50'>
+                    <div className='flex h-12 items-center border-b-2 w-32 relative border-pink-accent cursor-pointer'>
+                      <select value={selectedMonth} onChange={(e)=>handleChange(e)} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
+                          {months.map((month)=>{
+                            return(
+                              <option className='text-background'>{month}</option>
+                            )
+                          })}
+                      </select>
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0'>
+                        <path d="M16.904 13.16L19.026 11.04L30.584 22.594C30.7703 22.7791 30.9181 22.9993 31.019 23.2418C31.1199 23.4843 31.1719 23.7443 31.1719 24.007C31.1719 24.2696 31.1199 24.5297 31.019 24.7722C30.9181 25.0147 30.7703 25.2348 30.584 25.42L19.026 36.98L16.906 34.86L27.754 24.01L16.904 13.16" fill="#f5f5f5"/>
+                        </svg>
+                    </div>
+                    <div className='flex h-12 items-center w-36 border-b-2 border-pink-accent relative'>
+                      <select value={selectedClass} onChange={(e)=>selectClass(e)} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
+                          {SchoolClasses.map((month)=>{
+                            return(
+                              <option className='text-background'>{month}</option>
+                            )
+                          })}
+                      </select>
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0'>
+                        <path d="M16.904 13.16L19.026 11.04L30.584 22.594C30.7703 22.7791 30.9181 22.9993 31.019 23.2418C31.1199 23.4843 31.1719 23.7443 31.1719 24.007C31.1719 24.2696 31.1199 24.5297 31.019 24.7722C30.9181 25.0147 30.7703 25.2348 30.584 25.42L19.026 36.98L16.906 34.86L27.754 24.01L16.904 13.16" fill="#f5f5f5"/>
+                        </svg>
+                    </div>
+                  </div>
             {selected && 
             <button className='group hover:bg-pink-primary duration-200 flex relative items-center gap-3 p-3 bg-white bg-opacity-90 rounded-xl text-background group'>
               <motion.span 
@@ -39,6 +81,7 @@ const Convert = ({loggedIn}) => {
       <section className='w-full flex flex-wrap items-center gap-4'>
        <MonthDisplay
         month={"October"}
+        grade={"11.1"}
         date={"2024.10.1-2024.10.30"}
         totalMeal={1222}
         totalPayment={2000000}

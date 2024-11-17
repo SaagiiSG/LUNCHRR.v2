@@ -78,7 +78,7 @@ const MonthDisplay = ({month , date , grade , totalMeal, totalPayment, avaragePe
     return(
         <div className='w-[32%] flex flex-col border-pink-accent border-2 rounded-2xl px-3 py-2'>
             <header className='w-full flex flex-col pb-4 pt-2 border-b-2'>
-                <h1 className='text-2xl font-semibold'>{month} {grade} </h1>
+                <h1 className='text-2xl font-semibold'>{month} ({grade})</h1>
                 <p 
                 variants={PopUpVariants}
                 animate={isHovered ? "hover" : "initial"} 
