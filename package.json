@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nextui-org/date-picker": "^2.1.8",
+    "@nextui-org/react": "^2.4.8",
     "framer": "^2.4.1",
     "framer-motion": "^11.11.8",
     "motion": "^10.18.0",

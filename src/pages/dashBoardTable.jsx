@@ -3,22 +3,22 @@ import { useParams } from 'react-router-dom';
 import Day from '../components/dashboard/Day';
 
 const DashBoardTable = ({displayMonth, grade, day}  ) => {
-    const monthMap = {
-        Jan: 1,
-        Feb: 2,
-        Mar: 3,
-        Apr: 4,
-        May: 5,
-        June: 6,
-        July: 7,
-        Aug: 8,
-        Sep: 9,
-        Oct: 10,
-        Nov: 11,
-        Dec: 12,
+
+    const numberToMonthMap = {
+        1: "Jan",
+        2: "Feb",
+        3: "Mar",
+        4: "Apr",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "Aug",
+        9: "Sep",
+        10: "Oct",
+        11: "Nov",
+        12: "Dec",
       };
-    
-      const monthNumber = monthMap[displayMonth] || "Invalid month";
+      const convertedMonth = numberToMonthMap[displayMonth];
 
       
     const monthss = [
@@ -73,53 +73,75 @@ const DashBoardTable = ({displayMonth, grade, day}  ) => {
             grade:"9.2"
         },
         {
+            MonthName:"Oct",
+            Day:"11",
+            grade:"9.2"
+        },
+        {
             MonthName:"Nov",
             Day:"11",
             grade:"6.2"
         },
         {
-            MonthName:"Dec",
+            MonthName:"Nov",
             Day:"12",
+            grade:"9.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"12",
+            grade:"9.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"21",
+            grade:"9.2"
+        },
+        {
+            MonthName:"Dec",
+            Day:"20",
             grade:"7.2"
         },
     ]
     console.log("Props:", { displayMonth, grade, day });
-    console.log("Month Data:", monthss);
-    console.log(day);
-    const matchingObjects = monthss.filter(
-        (month) =>
-          month.MonthName === displayMonth &&
-          (grade === "all classes" || month.grade === grade) &&
-          (!day || month.Day === day.toString()) // Check day if provided
-      );
-    // const activeMonth = monthss.find(month=> month == displayMonth)
-    // const activeMonth = monthss[monthNumber-1].MonthName
-    // const activeClass = monthss[monthNumber-1].grade
-
-    // const displayTable = monthss.find((month) =>
-    //     month.MonthName === displayMonth && (grade === "all classes" || month.grade === grade))
     
+    const StringNum = day.toString()
+    
+    const matchingObjects = monthss.filter((month) => {
+        console.log(`Checking: ${month.MonthName} === ${displayMonth}`);
+        console.log(`Checking: ${grade} === "all classes" || ${month.grade} === ${grade}`);
+        console.log(`Checking: ${!day} || ${month.Day} === ${day.toString()}`);
+        
+        return (
+            month.MonthName === convertedMonth &&
+            (grade === "all classes" || month.grade === grade) &&
+            (!day || month.Day.trim() === day.toString().trim())
+          );
+        
+      });
+      
+      console.log("Matching Objects:", matchingObjects);
+      
 
     
     
     return(
-        <div>{matchingObjects.length > 0 ? (
-            matchingObjects.map((month, index) => (
-              <div key={index} className="p-4 border-b">
-                <p>
-                  <strong>Month:</strong> {month.MonthName}
-                </p>
-                <p>
-                  <strong>Day:</strong> {month.Day}
-                </p>
-                <p>
-                  <strong>Grade:</strong> {month.grade}
-                </p>
-              </div>
-            ))
-          ) : (
-            <p>No matching data found.</p>
-          )}</div>
+        <div>
+             {matchingObjects.length > 0 ? (
+        <div>
+          <h3>Matching Data:</h3>
+          <ul>
+            {matchingObjects.map((match, index) => (
+              <li key={index}>
+                Month: {match.MonthName}, Day: {match.Day || "N/A"}, Grade: {match.grade}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No Data</p>
+      )}
+        </div>
     )
 }
 

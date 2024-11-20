@@ -22,7 +22,7 @@ function UserListItem({ name, username, id, phone, initialChecked, onToggle, onS
   };
 
   return (
-    <tr className='even:bg-background even:bg-opacity-5 odd:bg-background odd:bg-opacity-15 w-full px-5'>
+    <tr className='even:bg-gray-100 even:bg-opacity-5 odd:bg-gray-500 odd:bg-opacity-15 w-full px-5'>
       <td className='h-14 text-lg font-md text-center w-[30%]'>{name}</td>
       <td className='h-14 text-lg font-md text-center w-[20%]'>{username}</td>
       <td className='h-14 text-lg font-md text-center w-[20%]'>{id}</td>
@@ -33,7 +33,7 @@ function UserListItem({ name, username, id, phone, initialChecked, onToggle, onS
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-pink-primary checked:border-slate-800"
+            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-gray-700 checked:bg-zinc-500 checked:border-slate-800"
           />
           <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
@@ -97,10 +97,10 @@ const AllUser = ({loggedIn}) => {
          initial={{opacity:0, background:"#f5f5f5"}}
          animate={{opacity:1}}
          transition={{delay:0, duration:0.6}}
-        className='w-full h-full rounded-tl-3xl bg-white p-4 overflow-auto flex flex-col items-center justify-center gap-4 relative'>
+        className='w-full h-full rounded-tl-3xl bg-gray-900 p-4 overflow-auto flex flex-col items-center justify-center gap-4 relative'>
         
         {isAddNewDisplay ? <Popup handleClick={DisplayAddNewUser}/> : ""}
-        <section className='relative flex flex-col w-full gap-4 items-start text-lgx  py-5 px-4 bg-background text-white rounded-2xl'>
+        <section className='relative flex flex-col w-full gap-4 items-start text-lgx  py-5 px-4 bg-gray-900 text-white rounded-2xl'>
           
           <div className='flex w-full items-center justify-between'>
           
@@ -109,7 +109,7 @@ const AllUser = ({loggedIn}) => {
             <p className='text-2xl'>Users</p>
           </div>
           
-          <div className='bg-white bg-opacity-95 text-background rounded-2xl items-center h-12 w-1/2 flex px-2 gap-2'>
+          <div className='bg-white bg-opacity-95 text-gray-800 rounded-2xl items-center h-12 w-1/2 flex px-2 gap-2'>
             <img src={SearchIcon} alt="" />
             <input
                 type="text"
@@ -120,7 +120,7 @@ const AllUser = ({loggedIn}) => {
               />
           </div>
 
-          <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-pink-primary'>
+          <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-zinc-500'>
             <p> add new user </p> 
             <span className='text-3xl rotate-180 group-hover:rotate-0 duration-300'>+</span>
           </button>
@@ -129,7 +129,7 @@ const AllUser = ({loggedIn}) => {
           <DeleteUser ShouldDisplay={length} names={selectedUserNames} deselect={deselectUser}/>
         </section>
         
-        <section className='w-full h-full border-2 rounded-2xl border-background overflow-auto mb-4'>
+        <section className='w-full h-full border-2 rounded-2xl border-gray-900 overflow-auto mb-4'>
           <table className='w-full relative border-collapse'>
             <tr className='bg-white sticky top-0 border-b-2 border-background z-50'>
               <th className='h-16 text-xl font-semibold w-[30%] border-b-2 border-background'>Name</th>

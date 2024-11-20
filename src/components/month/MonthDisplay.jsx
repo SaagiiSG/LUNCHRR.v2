@@ -35,7 +35,7 @@ const ListItem = ({icon, content, hovermessage}) => {
         <motion.p 
         variants={PopUpVariantsForLi}
         animate={isHoveredForLi ? "hover" : "initial"} 
-        className='bg-pink-accent text-white p-1 px-2 rounded-md absolute w-auto text-nowrap'>{hovermessage}</motion.p>
+        className='bg-zinc-400 text-white p-1 px-2 rounded-md absolute w-auto text-nowrap'>{hovermessage}</motion.p>
         <img className='w-10' src={icon} alt="" /> 
       </div>                
       <p>{content}  </p>
@@ -76,8 +76,8 @@ const MonthDisplay = ({month , date , grade , totalMeal, totalPayment, avaragePe
     }
    
     return(
-        <div className='w-[32%] flex flex-col border-pink-accent border-2 rounded-2xl px-3 py-2'>
-            <header className='w-full flex flex-col pb-4 pt-2 border-b-2'>
+        <div className='w-[32%] flex flex-col border-gray-700 border-2 rounded-2xl px-3 py-2'>
+            <header className='w-full flex flex-col pb-4 pt-2 border-b-2 border-gray-700'>
                 <h1 className='text-2xl font-semibold'>{month} ({grade})</h1>
                 <p 
                 variants={PopUpVariants}
@@ -99,7 +99,7 @@ const MonthDisplay = ({month , date , grade , totalMeal, totalPayment, avaragePe
               <motion.p  
               variants={PopUpVariants}
               animate={isHovered ? "hover" : "initial"} 
-              className='w-32 text-center absolute text-xs bg-background rounded-sm p-1 text-white'>convert this month</motion.p>
+              className='w-32 text-center absolute text-xs bg-gray-400 rounded-sm p-1 text-white'>convert this month</motion.p>
             <button>
             <motion.svg 
             variants={ArrowVariants}

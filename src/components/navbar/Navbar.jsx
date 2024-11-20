@@ -6,6 +6,7 @@ import LogoutIcon from '../../assets/icons/majesticons_logout-half-circle-line.s
 import NavBtn from './NavBtn'
 import {motion} from "framer-motion"
 // import { Link } from 'react-router-dom'
+import {NextUIProvider} from "@nextui-org/system";
 import Profile from '../profile'
 const Navbar = ({activebtnNumber, loggedIn}) => {
   const isLoggedIn = loggedIn;
@@ -13,9 +14,10 @@ const Navbar = ({activebtnNumber, loggedIn}) => {
   const logInOrOut = isLoggedIn ? "Log Out" : "Log In"
   const icon = DashboardIcon
   return (
+    <NextUIProvider>
     <nav  
       
-      className=' min-w-[250px] h-screen bg-background text-white flex flex-col items-center justify-between'>
+      className=' min-w-[250px] h-screen bg-gray-900 text-white flex flex-col items-center justify-between'>
       <section className='w-full'>
 
       <header className='w-full py-8 text-center text-3xl font-bold tracking-widest'>Lunchrr</header>
@@ -35,6 +37,7 @@ const Navbar = ({activebtnNumber, loggedIn}) => {
         userUrl={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6upkc6jjdNBwfdiHyTHtOv0M4C2YHf4nmCQ&s"} /> :""}
       
     </nav>
+    </NextUIProvider>
   )
 }
 

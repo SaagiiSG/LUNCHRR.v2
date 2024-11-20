@@ -5,14 +5,15 @@ import TopThree from '../components/dashboard/TopThree'
 import Navbar from '../components/navbar/Navbar'
 import dashboradIconfill from "..//assets/icons/mage_dashboard-2-fill.svg"
 import { motion } from 'framer-motion'
+import {DatePicker} from "@nextui-org/date-picker";
 const Dashboard = ({loggedIn}) => {
+  
   const m = new Date()
   const months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
-  const activeMonthNumber = m.getMonth()
-  const todayDay = m.getDate(); 
+  const activeMonthNumber = m.getMonth() 
   const activeMonth = months[activeMonthNumber]
   const [selectedMonth, setSelectedMonth] = React.useState(activeMonth)
-  
+  const todayDay = m.getDate();
 
   const [open, setOpen] = React.useState(false)
   const SchoolClasses = [
@@ -23,83 +24,56 @@ const Dashboard = ({loggedIn}) => {
     setSelectedClass(e.target.value)
   }
 
-  const [daysInMonth, setDaysInMonth] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState(todayDay);
+  const [selectedDate, setSelectedDate] = React.useState(null);
+    
+    const handleDateChange = (date) => {
+      if (date) {
 
-  const getDaysInMonth = (month) => {
-    const monthIndex = months.indexOf(month); // Get zero-based month index
-    const year = m.getFullYear(); // Assume the current year
-    return new Date(year, monthIndex + 1, 0).getDate(); // Get the number of days
-  };
+        setSelectedDate(date);
+        const month = date.getMonth() + 1; 
+        const day = date.getDate();
 
-  const handleChange = (e) => {
-    const newMonth = e.target.value;
-    setSelectedMonth(newMonth);
-    const days = getDaysInMonth(newMonth);
-    setDaysInMonth([...Array(days).keys()].map((d) => d + 1)); // Generate days array [1, 2, ..., days]
-  };
-
-  const handleDayChange = (e) => {
-    setSelectedDay(e.target.value);
-  };
-  React.useEffect(() => {
-  const days = getDaysInMonth(selectedMonth);
-  setDaysInMonth([...Array(days).keys()].map((d) => d + 1));
-}, [selectedMonth]);
+        setSelectedDay(day)
+        setSelectedMonth(month)
+      }
+    };
+    
     return (
    <main
-      className='w-full h-[200vh]  flex'>
+      className='w-full h-[200vh]  flex text-slate-50'>
       <Navbar activebtnNumber={1} loggedIn={loggedIn}/>
       <motion.article 
         initial={{opacity:0, background:"#f5f5f5"}}
         animate={{opacity:1}}
         transition={{delay:0, duration:0.6}}
-        className='w-full rounded-tl-3xl bg-white py-4 px-4 text-white overflow-auto flex flex-col gap-4 '>
+        className='w-full rounded-tl-3xl py-4 px-4 text-white overflow-auto flex flex-col gap-4 '>
         <motion.div 
           layout
           initial={{height:"72px", borderRadius:"1rem"}}
           animate={{height:"fit-content",borderRadius:"1rem"}}
           transition={{duration:"0.3"}}
-          className='group w-full h-fit  bg-background py-4' >
-            <motion.button layout  className='flex w-full justify-between items-center text-lgx  py-1  px-4 bg-background text-white rounded-2xl'>
+          className='group w-full h-fit  bg-gray-900 py-4 ' >
+            <motion.button layout  className='flex w-full justify-between items-center text-lgx  py-1  px-4  text-white rounded-2xl'>
                 <motion.div layout className='flex gap-4 items-center'>
                   <img src={dashboradIconfill} alt="" className='w-9' />
                   <p className='text-2xl'>Admin dashboard</p>
                   <div className='flex gap-2 z-50'>
-                    <div className='flex h-12 items-center border-b-2 w-32 relative border-pink-accent cursor-pointer'>
-                      <select value={selectedMonth} onChange={(e)=>handleChange(e)} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
-                          {months.map((month)=>{
-                            return(
-                              <option key={month} value={month} className='text-background'>{month}</option>
-                            )
-                          })}
-                      </select>
-                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0'>
-                        <path d="M16.904 13.16L19.026 11.04L30.584 22.594C30.7703 22.7791 30.9181 22.9993 31.019 23.2418C31.1199 23.4843 31.1719 23.7443 31.1719 24.007C31.1719 24.2696 31.1199 24.5297 31.019 24.7722C30.9181 25.0147 30.7703 25.2348 30.584 25.42L19.026 36.98L16.906 34.86L27.754 24.01L16.904 13.16" fill="#f5f5f5"/>
-                        </svg>
-                    </div>
-                    <div className='flex h-12 items-center w-36 border-b-2 border-pink-accent relative'>
-                      <select value={selectedClass} onChange={selectClass} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
+                   
+                    <div className='flex h-12 items-end w-38 border-b-2 relative border-neutral-700 '>
+                      <select value={selectedClass} onChange={selectClass} className='appearance-none flex flex-row gap-1 pl-1 text-md py-2  w-32 outline-none bg-transparent cursor-pointer '> 
                           {SchoolClasses.map((classOption)=>{
                             return(
-                              <option key={classOption} className='text-background'>{classOption}</option>
+                              <option key={classOption} className=' text-gray-900 font-small'>{classOption}</option>
                             )
                           })}
                       </select>
-                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0'>
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0 bottom-1'>
                         <path d="M16.904 13.16L19.026 11.04L30.584 22.594C30.7703 22.7791 30.9181 22.9993 31.019 23.2418C31.1199 23.4843 31.1719 23.7443 31.1719 24.007C31.1719 24.2696 31.1199 24.5297 31.019 24.7722C30.9181 25.0147 30.7703 25.2348 30.584 25.42L19.026 36.98L16.906 34.86L27.754 24.01L16.904 13.16" fill="#f5f5f5"/>
                         </svg>
                     </div>
-                    <div className='flex h-12 items-center w-36 border-b-2 border-pink-accent relative'>
-                    <select value={selectedDay} onChange={handleDayChange} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'>
-                      {daysInMonth.map((day) => (
-                        <option key={day} className='text-background'>{day}</option>
-                      ))}
-                    </select>
-                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className='rotate-90 absolute right-0'>
-                        <path d="M16.904 13.16L19.026 11.04L30.584 22.594C30.7703 22.7791 30.9181 22.9993 31.019 23.2418C31.1199 23.4843 31.1719 23.7443 31.1719 24.007C31.1719 24.2696 31.1199 24.5297 31.019 24.7722C30.9181 25.0147 30.7703 25.2348 30.584 25.42L19.026 36.98L16.906 34.86L27.754 24.01L16.904 13.16" fill="#f5f5f5"/>
-                        </svg>
-                    </div>
+                   
+                    <DatePicker label=" " onChange={(value) => handleDateChange(new Date(value))} className="h-12 max-w-[284px] text-lg flex flex-row items-end dark border-gray-400 border-opacity-25" variant='underlined' labelPlacement='outside-left'/>
                   </div>
                 </motion.div>
                 <motion.button layout onClick={()=>{ setOpen(!open) }} style={{rotate: open? "180deg" : "0deg"}} className='duration-300'>
@@ -111,7 +85,7 @@ const Dashboard = ({loggedIn}) => {
 
              {open && <TopThree/>}
         </motion.div>
-        <section className='w-full h-screen flex flex-col gap-2 text-background  border-background border-2 pt-2 rounded-2xl px-1'>
+        <section className='w-full h-screen flex flex-col gap-2 text-gray-800  border-gray-900 border-2 pt-2 rounded-2xl px-1'>
               
           <DashBoardTable displayMonth={selectedMonth} grade={selectedClass} day={selectedDay}/>
         

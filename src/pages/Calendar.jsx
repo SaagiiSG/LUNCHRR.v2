@@ -32,7 +32,7 @@ const Convert = ({loggedIn}) => {
         animate={{opacity:1}}
         transition={{delay:0, duration:0.6}}
       className='w-full rounded-tl-3xl bg-white py-4 px-4  overflow-auto flex flex-col items-start justify-start gap-8'>
-      <section className='flex w-full h-[80px] justify-between items-center text-lgx  py-5 px-4 bg-background text-white rounded-2xl'>
+      <section className='flex w-full h-[80px] justify-between items-center text-lgx  py-5 px-4 bg-gray-900 text-white rounded-2xl'>
             <div className='flex gap-4 items-center'>
               <img src={CalendarIcon} alt="" className='w-10' />
               <p className='text-2xl'>Convert</p>
@@ -42,7 +42,7 @@ const Convert = ({loggedIn}) => {
                       <select value={selectedMonth} onChange={(e)=>handleChange(e)} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
                           {months.map((month)=>{
                             return(
-                              <option className='text-background'>{month}</option>
+                              <option className='text-gray-800'>{month}</option>
                             )
                           })}
                       </select>
@@ -54,7 +54,7 @@ const Convert = ({loggedIn}) => {
                       <select value={selectedClass} onChange={(e)=>selectClass(e)} className='appearance-none flex flex-row gap-1 pl-3 text-lg py-1  w-32 outline-none bg-transparent cursor-pointer'> 
                           {SchoolClasses.map((month)=>{
                             return(
-                              <option className='text-background'>{month}</option>
+                              <option className='text-gray-800'>{month}</option>
                             )
                           })}
                       </select>
