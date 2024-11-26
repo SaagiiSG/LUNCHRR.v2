@@ -20,9 +20,9 @@ const Navbar = ({activebtnNumber, loggedIn}) => {
       className=' min-w-[250px] h-screen bg-gray-900 text-white flex flex-col items-center justify-between'>
       <section className='w-full'>
 
-      <header className='w-full py-8 flex flex-col items-center gap-3 text-center text-3xl font-bold tracking-widest'>
-          <img src={logo} alt="LUNCHRR logo" className='w-32'/>
-          <p>Lunchrr</p>
+      <header className='w-full lg:py-8 md:pb-4 flex flex-col items-center gap-3 text-center text-3xl font-bold tracking-widest'>
+          <img src={logo} alt="LUNCHRR logo" className='lg:w-32 md:w-24'/>
+          <p className='md:text-2xl lg:text-3xl'>Lunchrr</p>
       </header>
       
       <div className='w-full flex flex-col items-start gap-6 px-4 mt-8'>

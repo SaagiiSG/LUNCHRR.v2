@@ -41,7 +41,7 @@ const Dashboard = ({loggedIn}) => {
     
     return (
    <main
-      className='w-full h-[200vh]  flex text-slate-50'>
+      className='w-full h-[100vh]  flex text-slate-50'>
       <Navbar activebtnNumber={1} loggedIn={loggedIn}/>
       <motion.article 
         initial={{opacity:0, background:"#f5f5f5"}}
@@ -85,7 +85,7 @@ const Dashboard = ({loggedIn}) => {
 
              {open && <TopThree/>}
         </motion.div>
-        <section className='w-full h-screen flex flex-col gap-2 text-gray-800  border-gray-900 border-2 pt-2 rounded-2xl px-1'>
+        <section className='w-full h-full mb-3 flex flex-col items-center text-gray-900 border-gray-900 border-2 rounded-2xl overflow-auto'>
               
           <DashBoardTable displayMonth={selectedMonth} grade={selectedClass} day={selectedDay}/>
         

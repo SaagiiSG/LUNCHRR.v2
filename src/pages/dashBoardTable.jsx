@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import Day from '../components/dashboard/Day';
+import { div } from 'framer-motion/m';
 
 const DashBoardTable = ({displayMonth, grade, day}  ) => {
 
@@ -94,12 +95,37 @@ const DashBoardTable = ({displayMonth, grade, day}  ) => {
         },
         {
             MonthName:"Nov",
+            Day:"12",
+            grade:"10.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"12",
+            grade:"10.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"12",
+            grade:"10.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"12",
+            grade:"10.2"
+        },
+        {
+            MonthName:"Nov",
+            Day:"12",
+            grade:"9.2"
+        },
+        {
+            MonthName:"Nov",
             Day:"21",
             grade:"9.2"
         },
         {
             MonthName:"Dec",
-            Day:"20",
+            Day:"12",
             grade:"7.2"
         },
     ]
@@ -126,17 +152,32 @@ const DashBoardTable = ({displayMonth, grade, day}  ) => {
     
     
     return(
-        <div>
+        <div className='w-full '>
              {matchingObjects.length > 0 ? (
-        <div>
-          <h3>Matching Data:</h3>
-          <ul>
+        <div className='w-full flex flex-row flex-wrap gap-y-2 items-center justify-start '>
+          
             {matchingObjects.map((match, index) => (
-              <li key={index}>
-                Month: {match.MonthName}, Day: {match.Day || "N/A"}, Grade: {match.grade}
-              </li>
+              <div className='w-1/2 py-3 px-2 flex items-center justify-center '>
+                <div key={index} className='w-full mx-2 flex flex-col border-3 border-sky-900 rounded-xl overflow-hidden'>
+                    
+                    <div className='font-semibold bg-gradient-to-l from-emerald-400 to-sky-900 text-slate-100 pl-2 text-xl flex gap-2 py-1'>
+                         <p>{match.grade}</p>
+                         <span className='flex font-normal'>
+                            <p>( {match.MonthName}</p>.
+                            <p className='ml-[2px]'>{match.Day} )</p>
+                         </span>
+                    </div>
+                    <div className='bg-gray-900 text-slate-100 p-2'>
+                        <p>class total meal</p>
+                        <p>class total meal</p>
+                        <p>class total meal</p>                        
+                    </div>
+                    
+                    
+                </div>
+              </div>
             ))}
-          </ul>
+          
         </div>
       ) : (
         <p>No Data</p>
