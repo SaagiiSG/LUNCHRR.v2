@@ -21,7 +21,7 @@ function Displaying(){
                         ))}
                     </li>
                 </div>
-                <button className='text-base group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 py-2 px-4 rounded-2xl h-auto w-auto bg-zinc-500'>
+                <button className='text-base group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 py-2 px-4 rounded-2xl h-auto w-auto bg-sky-900'>
                     <p>Delete {plural}</p>
                     <img src={Trash} alt="" className=''/>
                 </button>

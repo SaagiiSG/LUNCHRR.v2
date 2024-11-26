@@ -33,7 +33,7 @@ function UserListItem({ name, username, id, phone, initialChecked, onToggle, onS
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-gray-700 checked:bg-zinc-500 checked:border-slate-800"
+            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-gray-700 checked:bg-emerald-400 checked:border-slate-800"
           />
           <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
@@ -120,7 +120,7 @@ const AllUser = ({loggedIn}) => {
               />
           </div>
 
-          <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-zinc-500'>
+          <button onClick={DisplayAddNewUser} className='group hover:scale-105 hover:bg-opacity-90 duration-300 flex items-center gap-2 px-4 rounded-2xl h-12 bg-sky-900'>
             <p> add new user </p> 
             <span className='text-3xl rotate-180 group-hover:rotate-0 duration-300'>+</span>
           </button>

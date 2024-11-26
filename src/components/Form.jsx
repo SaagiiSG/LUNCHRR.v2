@@ -14,7 +14,7 @@ const Form = ({loggedIn}) => {
     <form action="" className='flex flex-col w-full gap-4 p-4'>
       <input className='py-3 rounded-xl pl-3 leading-relaxed tracking-wider focus:outline-pink-primary' type="email" placeholder='email'/>
       <input className='py-3 rounded-xl pl-3 leading-relaxed tracking-wider focus:outline-pink-primary' type="password" placeholder='password' />
-      <button type='submit' className='text-xl py-2 px-9 text-white text-opacity-90 rounded-xl bg-gray-600 w-max hover:scale-105 duration-300 hover:border-zinc-500 border-[4px] border-background'>log in</button>
+      <button type='submit' className='text-xl py-2 px-9 text-white text-opacity-90 rounded-xl bg-gray-600 w-max hover:scale-105 duration-300 hover:border-emerald-400 border-[4px] border-background'>log in</button>
     </form>
     </section>
   )
@@ -28,7 +28,7 @@ const Form = ({loggedIn}) => {
     </header>
     <form action="" className='flex flex-col w-full gap-4 p-4'>
      
-      <button type='submit' className='text-xl py-2 px-9 text-white text-opacity-90 rounded-xl bg-gray-600 w-max hover:scale-105 duration-300 hover:border-zinc-500 border-[4px] '>log out</button>
+      <button type='submit' className='text-xl py-2 px-9 text-white text-opacity-90 rounded-xl bg-gray-600 w-max hover:scale-105 duration-300 hover:border-emerald-400 border-[4px] '>log out</button>
     </form>
     </section>
   )

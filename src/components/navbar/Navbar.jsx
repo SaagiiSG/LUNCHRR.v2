@@ -4,10 +4,10 @@ import UserIcon from '../../assets/icons/people-filled.svg'
 import CalendarIcon from '../../assets/icons/ion_calendar-outline.svg'
 import LogoutIcon from '../../assets/icons/majesticons_logout-half-circle-line.svg'
 import NavBtn from './NavBtn'
-import {motion} from "framer-motion"
-// import { Link } from 'react-router-dom'
 import {NextUIProvider} from "@nextui-org/system";
 import Profile from '../profile'
+import logo from "./../../assets/Logo-noFill.svg"
+
 const Navbar = ({activebtnNumber, loggedIn}) => {
   const isLoggedIn = loggedIn;
   
@@ -20,7 +20,10 @@ const Navbar = ({activebtnNumber, loggedIn}) => {
       className=' min-w-[250px] h-screen bg-gray-900 text-white flex flex-col items-center justify-between'>
       <section className='w-full'>
 
-      <header className='w-full py-8 text-center text-3xl font-bold tracking-widest'>Lunchrr</header>
+      <header className='w-full py-8 flex flex-col items-center gap-3 text-center text-3xl font-bold tracking-widest'>
+          <img src={logo} alt="LUNCHRR logo" className='w-32'/>
+          <p>Lunchrr</p>
+      </header>
       
       <div className='w-full flex flex-col items-start gap-6 px-4 mt-8'>
         
