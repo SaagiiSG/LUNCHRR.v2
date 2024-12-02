@@ -8,7 +8,7 @@ import DeleteUser from '../components/users/deleteUser'
 import {motion} from "framer-motion"
 // import UserListItem from '../components/users/UserListItem'
 // import { data } from '@remix-run/router/dist/utils'
-function UserListItem({ name, username, id, phone, initialChecked, onToggle, onSelectUser }){
+function UserListItem({ name, username, id, phone, initialChecked, onToggle }){
   const[isChecked, setIsChecked] = React.useState(initialChecked);
 
   const handleCheckboxChange = (event) => {
@@ -16,9 +16,6 @@ function UserListItem({ name, username, id, phone, initialChecked, onToggle, onS
     setIsChecked(checked);
     onToggle(checked);  // Pass the checked state back to parent
 
-    if (checked) {
-      onSelectUser(name);  // Pass the selected user's name to parent if checked
-    }
   };
 
   return (
@@ -63,11 +60,10 @@ const AllUser = ({loggedIn}) => {
         }
       });
     };
-
+    
     const length = selectedUserNames.length
     
     const deselectUser = (name) => {
-
       setSelectedUserNames((prevSelectedNames) => 
         prevSelectedNames.filter((selectedName) => selectedName !== name)
       );
@@ -80,7 +76,19 @@ const AllUser = ({loggedIn}) => {
     useEffect(()=>{
       FetchUsers()
     },[])
-  
+
+    const findUserByName = (name) => {
+      return users.find((user) => user.name === name);
+    };
+    const [selectedUserObjects , setSelectedUserObjects] = React.useState([])
+    React.useEffect(() => {
+      const updatedSelectedUserObjects = selectedUserNames.map((name) => findUserByName(name));
+      setSelectedUserObjects(updatedSelectedUserObjects);
+    }, [selectedUserNames]);
+    console.log(selectedUserObjects);
+    
+
+
     const [isAddNewDisplay, setAddNewUser] = React.useState(false)
 
    function DisplayAddNewUser(){
@@ -139,18 +147,7 @@ const AllUser = ({loggedIn}) => {
               <th className='h-16 text-xl font-semibold w-[10%] border-b-2 border-background'></th>
             </tr>
             <tbody>
-              {/* {users.map((uData)=>{
-                return(
-                  <UserListItem 
-                    name={uData.name}
-                    username={uData.username}
-                    id={uData.id}
-                    phone={uData.phone}
-                    initialChecked={selectedUserNames.includes(uData.name)}
-                    onToggle={(checked) => toggleChecked(checked, uData.name)}
-                  />
-                )
-                })} */}
+             
                 {filteredUsers.map((uData) => (
                 <UserListItem
                   key={uData.id}
