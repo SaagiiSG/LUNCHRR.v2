@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import Day from '../components/dashboard/Day';
 import { div } from 'framer-motion/m';
@@ -20,115 +20,15 @@ const DashBoardTable = ({displayMonth, grade, day}  ) => {
         12: "Dec",
       };
       const convertedMonth = numberToMonthMap[displayMonth];
-
+    //   monthss
       
-    const monthss = [
-        {
-            MonthName:"Jan",
-            Day:"1",
-            grade:"11.2"
-        },
-        {
-            MonthName:"Feb",
-            Day:"2",
-            grade:"5.2"
-        },
-        {
-            MonthName:"Mar",
-            Day:"3",
-            grade:"5.2"
-        },
-        {
-            MonthName:"Apr",
-            Day:"4",
-            grade:"5.2"
-        },
-        {
-            MonthName:"May",
-            Day:"5",
-            grade:"5.2"
-        },
-        {
-            MonthName:"June",
-            Day:"6",
-            grade:"8.1"
-        },
-        {
-            MonthName:"July",
-            Day:"7",
-            grade:"8.2"
-        },
-        {
-            MonthName:"Aug",
-            Day:"8",
-            grade:"7.2"
-        },
-        {
-            MonthName:"Sep",
-            Day:"9",
-            grade:"5.1"
-        },
-        {
-            MonthName:"Oct",
-            Day:"10",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Oct",
-            Day:"11",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"11",
-            grade:"6.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"10.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"10.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"10.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"10.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"12",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Nov",
-            Day:"21",
-            grade:"9.2"
-        },
-        {
-            MonthName:"Dec",
-            Day:"12",
-            grade:"7.2"
-        },
-    ]
+    const[monthss,setMonths] = useState([])
+    const FetchUsers=() => {fetch('http://localhost:8080/dashboard')
+    .then(response => response.json())
+    .then(json => setMonths(json))}
+    useEffect(()=>{
+        FetchUsers()
+    })
     console.log("Props:", { displayMonth, grade, day });
     
     const StringNum = day.toString()

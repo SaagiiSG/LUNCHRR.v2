@@ -51,10 +51,10 @@ const AllUser = ({loggedIn}) => {
 
     const [selectedUserNames, setSelectedUserNames] = React.useState([]); // State for selected user's name
 
-    const toggleChecked = (checked, name) => {
+    const toggleChecked = (checked, name, id) => {
       setSelectedUserNames((prevSelectedNames) => {
         if (checked) {
-          return [...prevSelectedNames, name]; // Add user name if checked
+          return [...prevSelectedNames, {name:name, id:id}]; // Add user name if checked
         } else {
           return prevSelectedNames.filter((selectedName) => selectedName !== name); // Remove user name if unchecked
         }
@@ -70,22 +70,14 @@ const AllUser = ({loggedIn}) => {
     };
 
     const[users,setUsers] = React.useState([])
-    const FetchUsers=() => {fetch('https://jsonplaceholder.typicode.com/users')
+    const FetchUsers=() => {fetch('http://localhost:8080/')
     .then(response => response.json())
     .then(json => setUsers(json))}
     useEffect(()=>{
       FetchUsers()
     },[])
 
-    const findUserByName = (name) => {
-      return users.find((user) => user.name === name);
-    };
-    const [selectedUserObjects , setSelectedUserObjects] = React.useState([])
-    React.useEffect(() => {
-      const updatedSelectedUserObjects = selectedUserNames.map((name) => findUserByName(name));
-      setSelectedUserObjects(updatedSelectedUserObjects);
-    }, [selectedUserNames]);
-    console.log(selectedUserObjects);
+   
     
 
 
@@ -155,8 +147,8 @@ const AllUser = ({loggedIn}) => {
                   username={uData.username}
                   id={uData.id}
                   phone={uData.phone}
-                  initialChecked={selectedUserNames.includes(uData.name)}
-                  onToggle={(checked) => toggleChecked(checked, uData.name)}
+                  initialChecked={selectedUserNames.includes(uData.name, uData.id)}
+                  onToggle={(checked) => toggleChecked(checked, uData.name, uData.id)}
                 />
               ))}
             </tbody>
